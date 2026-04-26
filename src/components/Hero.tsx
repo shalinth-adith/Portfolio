@@ -256,7 +256,7 @@ export default function Hero() {
             className="hero-fade"
             style={{ fontSize: 16, fontWeight: 400, color: "var(--ink2)", marginTop: 18, opacity: 0 }}
           >
-            — It&apos;s Shalinth, an iOS developer
+            — It&apos;s Shalinth Adithyan, an iOS developer
           </p>
         </div>
 

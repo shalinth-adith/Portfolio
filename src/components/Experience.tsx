@@ -36,7 +36,7 @@ const appProjects: Project[] = [
   {
     company: "The Routine",
     period: "2025",
-    role: "Open-source SwiftUI component library — opinionated, animated, and delightful.",
+    role: "Routine is a simple, modern habit tracker app built. It helps users build strong routines by tracking daily activities.",
     tags: ["Library", "Open Source"],
     link: "https://github.com/shalinth-adith/TheRoutine",
     dark: true,
@@ -133,7 +133,7 @@ export default function Experience({ openBooking }: { openBooking: () => void })
         </div>
         <div className="exp-header-el" style={{ opacity: 0 }}>
           <p style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.72, marginBottom: 18 }}>
-            Over the past 3+ years, I&apos;ve shipped apps across domains — from social tools to finance to open-source libraries.
+            Over the past 1+ years, I&apos;ve shipped apps across domains - from social tools to finance to open-source libraries.
           </p>
           <button
             className="link-arrow"

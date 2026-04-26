@@ -13,7 +13,7 @@ const stack = ["Swift", "SwiftUI", "Xcode", "Firebase", "CoreData", "Figma", "AV
 
 const bullets = [
   "With 1+ years of Swift experience, I build intuitive, user-focused iOS apps that solve real problems and deliver seamless digital experiences.",
-  "I thrive on the intersection of design and code — blending SwiftUI precision with an eye for detail to create apps that feel alive.",
+  "I thrive on the intersection of design and code - blending SwiftUI precision with an eye for detail to create apps that feel alive.",
 ];
 
 export default function About() {
@@ -167,7 +167,7 @@ export default function About() {
           </p>
           <br />
           <p style={{ fontSize: 14.5, color: "var(--ink2)", lineHeight: 1.72 }}>
-            I&apos;m a fresh iOS developer who believes great apps should feel like magic — not manuals. I build with SwiftUI and spend way too much time getting the animations just right.
+            I&apos;m a fresh iOS developer who believes great apps should feel like magic - not manuals. I build with SwiftUI and spend way too much time getting the animations just right.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 32 }}>
             {stack.map((s) => (
