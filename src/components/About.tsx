@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const stack = ["Swift", "SwiftUI", "Xcode", "Firebase", "CoreData", "Figma", "AVFoundation", "CloudKit"];
 
 const bullets = [
@@ -209,7 +211,7 @@ export default function About() {
             }}
           >
             <img
-              src="/about.jpg"
+              src={`${base}/about.jpg`}
               alt="Shalinth"
               style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
             />
@@ -265,9 +267,9 @@ export default function About() {
         }}
       >
         {[
-          { src: "/gallery-expense.jpg", alt: "Expense Tracker Pro", fit: "contain" as const },
-          { src: "/gallery-huddle.jpg", alt: "Huddle", fit: "contain" as const },
-          { src: "/gallery-routine.jpg", alt: "The Routine", fit: "cover" as const },
+          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "contain" as const },
+          { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "contain" as const },
+          { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const },
         ].map((item, i) => (
           <div key={i} className="gal-item gal-clip" style={{ clipPath: "inset(0 100% 0 0)", position: "relative", overflow: "hidden", background: "#111" }}>
             <img
