@@ -194,11 +194,31 @@ export default function Hero() {
             <div
               style={{
                 position: "absolute",
-                left: 0,
-                top: 0,
-                bottom: 0,
+                left: 0, top: 0, bottom: 0,
                 width: 200,
                 background: "linear-gradient(to right, var(--bg), transparent)",
+                zIndex: 3,
+                pointerEvents: "none",
+              }}
+            />
+            {/* Gradient fade-bottom */}
+            <div
+              style={{
+                position: "absolute",
+                left: 0, right: 0, bottom: 0,
+                height: 220,
+                background: "linear-gradient(to top, var(--bg), transparent)",
+                zIndex: 3,
+                pointerEvents: "none",
+              }}
+            />
+            {/* Gradient fade-right */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0, right: 0, bottom: 0,
+                width: 120,
+                background: "linear-gradient(to left, var(--bg), transparent)",
                 zIndex: 3,
                 pointerEvents: "none",
               }}
