@@ -32,23 +32,10 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-    } else {
-      const top = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, -parseInt(top || "0"));
-    }
-    return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-    };
+    if (!menuOpen) return;
+    const prevent = (e: TouchEvent) => e.preventDefault();
+    document.addEventListener("touchmove", prevent, { passive: false });
+    return () => document.removeEventListener("touchmove", prevent);
   }, [menuOpen]);
 
   // Magnetic logo
@@ -178,8 +165,9 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
         <div
           className="md:hidden"
           style={{
-            position: "fixed", top: 64, left: 0, right: 0, bottom: 0,
-            background: "var(--bg)", zIndex: 40,
+            position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+            background: "var(--bg)", zIndex: 9000,
+            paddingTop: 80,
             display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center", gap: 40,
           }}
