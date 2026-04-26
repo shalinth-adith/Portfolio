@@ -31,6 +31,11 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   // Magnetic logo
   useEffect(() => {
     const logo = logoRef.current;
