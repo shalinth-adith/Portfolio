@@ -107,10 +107,11 @@ export default function Experience({ openBooking }: { openBooking: () => void })
     <section
       ref={sectionRef}
       id="portfolio"
+      className="exp-section"
       style={{ padding: "100px 48px 100px 104px", background: "var(--bg)" }}
     >
       {/* Header */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start", marginBottom: 60 }}>
+      <div className="exp-header-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start", marginBottom: 60 }}>
         <div>
           <div className="exp-header-el section-label" style={{ opacity: 0 }}>
             <span className="dot" />
@@ -169,7 +170,7 @@ export default function Experience({ openBooking }: { openBooking: () => void })
                 }
               }}
             >
-              <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", alignItems: "center", gap: 24 }}>
+              <div className="exp-row-grid" style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", alignItems: "center", gap: 24 }}>
                 <div>
                   <div
                     className="exp-company"
@@ -188,7 +189,7 @@ export default function Experience({ openBooking }: { openBooking: () => void })
                   </div>
                 </div>
                 <div style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.5 }}>{proj.role}</div>
-                <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+                <div className="exp-tags" style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
                   {proj.tags.map((tag: string) => (
                     <span key={tag} className={proj.dark ? "badge badge-dark" : "badge"}>{tag}</span>
                   ))}
@@ -211,7 +212,7 @@ export default function Experience({ openBooking }: { openBooking: () => void })
               className="exp-row"
               style={{ opacity: 0, paddingLeft: 0 }}
             >
-              <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", alignItems: "center", gap: 24 }}>
+              <div className="exp-row-grid" style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", alignItems: "center", gap: 24 }}>
                 <div>
                   <div
                     className="exp-company"
@@ -225,7 +226,7 @@ export default function Experience({ openBooking }: { openBooking: () => void })
                   </div>
                 </div>
                 <div style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.5 }}>{proj.role}</div>
-                <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+                <div className="exp-tags" style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
                   {proj.tags.map((tag: string) => (
                     <span key={tag} className="badge">{tag}</span>
                   ))}

@@ -394,6 +394,19 @@ a {
     border-top: 3px solid var(--bg);
   }
 
+  /* Experience */
+  .exp-section { padding: 64px 24px !important; }
+  .exp-header-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .exp-row-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .exp-tags { justify-content: flex-start !important; }
+
+  /* Blog */
+  .blog-section { padding: 64px 24px !important; }
+  .blog-grid { grid-template-columns: 1fr !important; }
+
   /* Footer */
   .footer-section { padding: 40px 24px 28px !important; }
 }

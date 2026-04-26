@@ -101,6 +101,7 @@ export default function Blog() {
     <section
       ref={sectionRef}
       id="blog"
+      className="blog-section"
       style={{ padding: "100px 48px", background: "var(--bg2)", textAlign: "center" }}
     >
       {/* Label */}
@@ -128,6 +129,7 @@ export default function Blog() {
 
       {/* Cards */}
       <div
+        className="blog-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
