@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -13,6 +14,9 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
   const logoRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useGSAP(
     () => {
@@ -81,6 +85,61 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  const menuOverlay = (
+    <div
+      style={{
+        position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+        background: "var(--bg)",
+        zIndex: 99999,
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", gap: 40,
+      }}
+    >
+      <button
+        onClick={() => setMenuOpen(false)}
+        aria-label="Close menu"
+        style={{
+          position: "absolute", top: 20, right: 20,
+          background: "none", border: "none", cursor: "pointer",
+          padding: 8, lineHeight: 0,
+        }}
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6L6 18M6 6l12 12" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      </button>
+
+      {links.map((link) => (
+        <button
+          key={link}
+          onClick={() => { scrollTo(link); setMenuOpen(false); }}
+          style={{
+            fontSize: 32, fontWeight: 200, letterSpacing: "-0.02em",
+            background: "none", border: "none", cursor: "pointer",
+            color: "var(--ink)", transition: "opacity 0.2s",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+        >
+          {link}
+        </button>
+      ))}
+
+      <button
+        onClick={() => { openBooking(); setMenuOpen(false); }}
+        style={{
+          marginTop: 8, fontSize: 15, fontWeight: 400,
+          background: "var(--ink)", color: "var(--bg)",
+          border: "none", cursor: "pointer",
+          padding: "12px 32px", borderRadius: 999,
+          letterSpacing: "0.01em",
+        }}
+      >
+        Book A Call
+      </button>
+    </div>
+  );
+
   return (
     <nav
       ref={navRef}
@@ -142,7 +201,7 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
         </button>
       </div>
 
-      {/* Hamburger — mobile only */}
+      {/* Hamburger — mobile only, hidden when menu is open */}
       {!menuOpen && (
         <button
           className="md:hidden"
@@ -156,63 +215,8 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
         </button>
       )}
 
-      {/* Mobile menu drawer */}
-      {menuOpen && (
-        <div
-          style={{
-            position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-            background: "var(--bg)",
-            zIndex: 9999,
-            WebkitTransform: "translateZ(0)",
-            transform: "translateZ(0)",
-            display: "flex", flexDirection: "column",
-            alignItems: "center", justifyContent: "center", gap: 40,
-          }}
-        >
-          {/* Close button */}
-          <button
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-            style={{
-              position: "absolute", top: 20, right: 20,
-              background: "none", border: "none", cursor: "pointer",
-              padding: 8, lineHeight: 0,
-            }}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M18 6L6 18M6 6l12 12" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </button>
-
-          {links.map((link) => (
-            <button
-              key={link}
-              onClick={() => { scrollTo(link); setMenuOpen(false); }}
-              style={{
-                fontSize: 32, fontWeight: 200, letterSpacing: "-0.02em",
-                background: "none", border: "none", cursor: "pointer",
-                color: "var(--ink)", transition: "opacity 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              {link}
-            </button>
-          ))}
-          <button
-            onClick={() => { openBooking(); setMenuOpen(false); }}
-            style={{
-              marginTop: 8, fontSize: 15, fontWeight: 400,
-              background: "var(--ink)", color: "var(--bg)",
-              border: "none", cursor: "pointer",
-              padding: "12px 32px", borderRadius: 999,
-              letterSpacing: "0.01em",
-            }}
-          >
-            Book A Call
-          </button>
-        </div>
-      )}
+      {/* Portal: renders directly into document.body, above all GSAP stacking contexts */}
+      {menuOpen && mounted && createPortal(menuOverlay, document.body)}
     </nav>
   );
 }

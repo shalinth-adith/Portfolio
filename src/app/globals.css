@@ -279,7 +279,6 @@ a {
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
-  transform-style: preserve-3d;
 }
 
 /* ── FOOTER EMAIL ── */
