@@ -202,32 +202,6 @@ export default function About() {
             </p>
           </div>
 
-          {/* Mini photo */}
-          <div
-            className="photo-mini-wrap"
-            style={{
-              marginTop: 16, borderRadius: "var(--radius)", overflow: "hidden",
-              position: "relative", aspectRatio: "3/4", background: "#c4c0ba",
-              clipPath: "inset(100% 0 0 0)",
-            }}
-          >
-            <img
-              src={`${base}/about.jpg`}
-              alt="Shalinth"
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
-            />
-            <div
-              style={{
-                position: "absolute", top: 12, right: 12,
-                width: 36, height: 36, background: "white", borderRadius: "50%",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-                <path d="M2 10L10 2M10 2H4M10 2V8" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </div>
         </div>
 
         {/* Right — Bullets */}

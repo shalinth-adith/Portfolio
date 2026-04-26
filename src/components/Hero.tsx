@@ -206,7 +206,7 @@ export default function Hero() {
               style={{
                 position: "absolute",
                 left: 0, right: 0, bottom: 0,
-                height: 100,
+                height: 120,
                 background: "linear-gradient(to top, var(--bg), transparent)",
                 zIndex: 3,
                 pointerEvents: "none",
