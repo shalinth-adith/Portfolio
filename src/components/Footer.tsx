@@ -51,6 +51,7 @@ export default function Footer() {
   return (
     <footer
       ref={sectionRef}
+      className="footer-section"
       style={{ background: "var(--black)", padding: "56px 48px 36px", position: "relative", overflow: "hidden" }}
     >
       {/* Subtle grid lines */}

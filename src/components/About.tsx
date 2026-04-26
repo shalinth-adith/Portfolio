@@ -134,6 +134,7 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
+      className="about-section"
       style={{ padding: "100px 48px 100px 104px", background: "var(--bg)" }}
     >
       {/* Label + Title */}
@@ -157,7 +158,7 @@ export default function About() {
       </h2>
 
       {/* 3-col grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 32, alignItems: "start" }}>
+      <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 32, alignItems: "start" }}>
 
         {/* Left — Text + Stack */}
         <div className="about-left" style={{ opacity: 0 }}>

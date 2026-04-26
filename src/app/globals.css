@@ -363,3 +363,37 @@ a {
   animation: arrowBounce 1.5s ease-in-out infinite;
   display: inline-block;
 }
+
+/* ── TOUCH / MOBILE ── */
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+  button, a { cursor: pointer; }
+}
+
+@media (max-width: 767px) {
+  /* Hero */
+  .hero-grid { grid-template-columns: 1fr !important; }
+  .hero-sidebar { display: none !important; }
+  .hero-content { padding: 32px 24px 40px !important; }
+  .hero-hello { font-size: clamp(64px, 18vw, 100px) !important; }
+  .hero-photo { opacity: 0.18 !important; }
+
+  /* About */
+  .about-section { padding: 64px 24px !important; }
+  .about-grid { grid-template-columns: 1fr !important; }
+
+  /* Gallery strip */
+  .gallery-strip {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  .gallery-strip .gal-item { height: 220px; }
+  .gal-item + .gal-item {
+    border-left: none !important;
+    border-top: 3px solid var(--bg);
+  }
+
+  /* Footer */
+  .footer-section { padding: 40px 24px 28px !important; }
+}

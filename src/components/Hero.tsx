@@ -109,6 +109,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="home"
+      className="hero-grid"
       style={{
         minHeight: "100vh",
         paddingTop: 80,
@@ -121,6 +122,7 @@ export default function Hero() {
     >
       {/* Left sidebar */}
       <div
+        className="hero-sidebar"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -146,6 +148,7 @@ export default function Hero() {
 
       {/* Main content */}
       <div
+        className="hero-content"
         style={{
           position: "relative",
           padding: "40px 48px 48px",
@@ -174,6 +177,7 @@ export default function Hero() {
         {/* Right photo — absolute */}
         <div
           ref={photoRef}
+          className="hero-photo"
           style={{
             position: "absolute",
             right: 0,
@@ -227,6 +231,7 @@ export default function Hero() {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", zIndex: 5 }}>
           <h1
             ref={helloRef}
+            className="hero-hello"
             style={{
               fontSize: "clamp(100px, 14vw, 190px)",
               fontWeight: 200,

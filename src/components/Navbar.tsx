@@ -12,6 +12,7 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useGSAP(
     () => {
@@ -121,7 +122,7 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
         ))}
       </ul>
 
-      <div className="nav-item">
+      <div className="nav-item hidden md:block">
         <button
           className="link-arrow"
           style={{ fontSize: 14, color: "var(--ink)", background: "none", border: "none", cursor: "none" }}
@@ -133,6 +134,65 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
           </svg>
         </button>
       </div>
+
+      {/* Hamburger — mobile only */}
+      <button
+        className="md:hidden"
+        onClick={() => setMenuOpen((o) => !o)}
+        aria-label="Toggle menu"
+        style={{ background: "none", border: "none", cursor: "pointer", padding: 4, lineHeight: 0 }}
+      >
+        {menuOpen ? (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6l12 12" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+        ) : (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+        )}
+      </button>
+
+      {/* Mobile menu drawer */}
+      {menuOpen && (
+        <div
+          className="md:hidden"
+          style={{
+            position: "fixed", top: 64, left: 0, right: 0, bottom: 0,
+            background: "var(--bg)", zIndex: 40,
+            display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center", gap: 40,
+          }}
+        >
+          {links.map((link) => (
+            <button
+              key={link}
+              onClick={() => { scrollTo(link); setMenuOpen(false); }}
+              style={{
+                fontSize: 32, fontWeight: 200, letterSpacing: "-0.02em",
+                background: "none", border: "none", cursor: "pointer",
+                color: "var(--ink)", transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              {link}
+            </button>
+          ))}
+          <button
+            onClick={() => { openBooking(); setMenuOpen(false); }}
+            style={{
+              marginTop: 8, fontSize: 15, fontWeight: 400,
+              background: "var(--ink)", color: "var(--bg)",
+              border: "none", cursor: "pointer",
+              padding: "12px 32px", borderRadius: 999,
+              letterSpacing: "0.01em",
+            }}
+          >
+            Book A Call
+          </button>
+        </div>
+      )}
     </nav>
   );
 }
