@@ -203,27 +203,11 @@ export default function Hero() {
                 pointerEvents: "none",
               }}
             />
-            {/* SVG Avatar */}
-            <svg
-              viewBox="0 0 700 900"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMidYMax slice"
-              style={{ width: "100%", height: "100%", display: "block" }}
-            >
-              <rect width="700" height="900" fill="#C8C5BF" />
-              <ellipse cx="350" cy="280" rx="240" ry="240" fill="#B8B5AF" opacity="0.55" />
-              <ellipse cx="350" cy="700" rx="300" ry="200" fill="#A8A5A0" opacity="0.45" />
-              <ellipse cx="350" cy="220" rx="100" ry="105" fill="#2A2825" opacity="0.9" />
-              <path d="M140 900 Q180 540 350 490 Q520 540 560 900Z" fill="#2A2825" opacity="0.9" />
-              <circle cx="316" cy="236" r="32" fill="none" stroke="#0A0908" strokeWidth="6" opacity="0.75" />
-              <circle cx="384" cy="236" r="32" fill="none" stroke="#0A0908" strokeWidth="6" opacity="0.75" />
-              <line x1="348" y1="236" x2="352" y2="236" stroke="#0A0908" strokeWidth="5" opacity="0.7" />
-              <line x1="284" y1="230" x2="260" y2="220" stroke="#0A0908" strokeWidth="5" opacity="0.65" />
-              <line x1="416" y1="230" x2="440" y2="220" stroke="#0A0908" strokeWidth="5" opacity="0.65" />
-              <ellipse cx="350" cy="138" rx="90" ry="55" fill="#1A1816" opacity="0.85" />
-              <ellipse cx="290" cy="148" rx="30" ry="20" fill="#1A1816" opacity="0.7" />
-              <ellipse cx="410" cy="148" rx="30" ry="20" fill="#1A1816" opacity="0.7" />
-            </svg>
+            <img
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/Hero.jpg`}
+              alt="Shalinth Adithyan"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+            />
           </div>
         </div>
 
