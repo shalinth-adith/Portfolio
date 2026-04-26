@@ -143,35 +143,47 @@ export default function Navbar({ openBooking }: { openBooking: () => void }) {
       </div>
 
       {/* Hamburger — mobile only */}
-      <button
-        className="md:hidden"
-        onClick={() => setMenuOpen((o) => !o)}
-        aria-label="Toggle menu"
-        style={{ background: "none", border: "none", cursor: "pointer", padding: 4, lineHeight: 0 }}
-      >
-        {menuOpen ? (
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M18 6L6 18M6 6l12 12" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
-        ) : (
+      {!menuOpen && (
+        <button
+          className="md:hidden"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 4, lineHeight: 0 }}
+        >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M4 7h16M4 12h16M4 17h16" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
           </svg>
-        )}
-      </button>
+        </button>
+      )}
 
       {/* Mobile menu drawer */}
       {menuOpen && (
         <div
-          className="md:hidden"
           style={{
             position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-            background: "var(--bg)", zIndex: 9000,
-            paddingTop: 80,
+            background: "var(--bg)",
+            zIndex: 9999,
+            WebkitTransform: "translateZ(0)",
+            transform: "translateZ(0)",
             display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center", gap: 40,
           }}
         >
+          {/* Close button */}
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            style={{
+              position: "absolute", top: 20, right: 20,
+              background: "none", border: "none", cursor: "pointer",
+              padding: 8, lineHeight: 0,
+            }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M18 6L6 18M6 6l12 12" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </button>
+
           {links.map((link) => (
             <button
               key={link}
