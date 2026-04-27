@@ -242,9 +242,9 @@ export default function About() {
         }}
       >
         {[
-          { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "contain" as const },
-          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "contain" as const },
-          { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const },
+          { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "cover" as const, pos: "center center" },
+          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "cover" as const, pos: "center top" },
+          { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const, pos: "center center" },
         ].map((item, i) => (
           <div key={i} className="gal-item gal-clip" style={{ clipPath: "inset(0 100% 0 0)", position: "relative", overflow: "hidden", background: "#111" }}>
             <img
@@ -254,7 +254,7 @@ export default function About() {
                 width: "100%",
                 height: "100%",
                 objectFit: item.fit,
-                objectPosition: "center center",
+                objectPosition: item.pos,
                 display: "block",
                 transition: "transform 0.6s cubic-bezier(0.23,1,0.32,1)",
               }}
