@@ -259,6 +259,7 @@ export default function About() {
                 transition: "transform 0.6s cubic-bezier(0.23,1,0.32,1)",
                 filter: "grayscale(100%) contrast(1.05)",
               }}
+              loading="lazy"
             />
             <div style={{ position: "absolute", inset: 0, background: "rgba(10,10,10,0.15)", pointerEvents: "none" }} />
             <div className="gal-btn">
