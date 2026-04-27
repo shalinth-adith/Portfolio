@@ -242,11 +242,11 @@ export default function About() {
         }}
       >
         {[
-          { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "cover" as const, pos: "center center" },
-          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "cover" as const, pos: "center top" },
-          { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const, pos: "center center" },
+          { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "cover" as const, pos: "center center", bg: "#1a1008" },
+          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "contain" as const, pos: "center center", bg: "#0b0d1a" },
+          { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const, pos: "center center", bg: "#111" },
         ].map((item, i) => (
-          <div key={i} className="gal-item gal-clip" style={{ clipPath: "inset(0 100% 0 0)", position: "relative", overflow: "hidden", background: "#111" }}>
+          <div key={i} className="gal-item gal-clip" style={{ clipPath: "inset(0 100% 0 0)", position: "relative", overflow: "hidden", background: item.bg }}>
             <img
               src={item.src}
               alt={item.alt}
