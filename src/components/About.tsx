@@ -257,7 +257,6 @@ export default function About() {
                 objectPosition: "center center",
                 display: "block",
                 transition: "transform 0.6s cubic-bezier(0.23,1,0.32,1)",
-                filter: "grayscale(100%) contrast(1.05)",
               }}
               loading="lazy"
             />
