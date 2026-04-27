@@ -242,8 +242,8 @@ export default function About() {
         }}
       >
         {[
-          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "contain" as const },
           { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "contain" as const },
+          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "contain" as const },
           { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const },
         ].map((item, i) => (
           <div key={i} className="gal-item gal-clip" style={{ clipPath: "inset(0 100% 0 0)", position: "relative", overflow: "hidden", background: "#111" }}>
