@@ -118,6 +118,105 @@ body::after {
   letter-spacing: -0.01em;
 }
 
+/* ── JOURNEY RAIL ── */
+.journey-rail {
+  position: fixed;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 56vh;
+  width: 14px;
+  z-index: 60;
+}
+
+.rail-track,
+.rail-fill {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.rail-track {
+  background: var(--line);
+}
+
+.rail-fill {
+  background: var(--accent);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+}
+
+.rail-star {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  margin-top: -9px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.rail-star svg {
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(240, 81, 56, 0.45));
+}
+
+.rail-dot {
+  position: absolute;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid var(--ink3);
+  background: var(--bg);
+  /* halo keeps the dot legible over the hero photo in both themes */
+  box-shadow: 0 0 0 2px rgba(128, 126, 120, 0.25);
+  padding: 0;
+  cursor: none;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.rail-dot:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.rail-dot.active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.rail-label {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  opacity: 0;
+  transition: opacity 0.25s, right 0.25s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.rail-dot:hover .rail-label {
+  opacity: 1;
+  right: 14px;
+}
+
 /* ── SCROLL PROGRESS BAR ── */
 .scroll-progress {
   position: fixed;
@@ -641,6 +740,9 @@ html.theme-switching *::after {
   .hero-hello { font-size: clamp(64px, 18vw, 100px) !important; }
   .hero-photo { opacity: 0.18 !important; }
   .hero-badge { display: none; }
+
+  /* Journey rail */
+  .journey-rail { display: none; }
 
   /* About */
   .about-section { padding: 64px 24px !important; }

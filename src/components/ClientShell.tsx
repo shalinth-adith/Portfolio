@@ -17,6 +17,7 @@ import CTA from "./CTA";
 import Footer from "./Footer";
 import BookingModal from "./BookingModal";
 import ScrollProgress from "./ScrollProgress";
+import JourneyRail from "./JourneyRail";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,6 +55,7 @@ export default function ClientShell() {
       <Loader />
       <Cursor />
       <ScrollProgress />
+      <JourneyRail />
       <Navbar openBooking={open} />
       <main>
         <Hero />
