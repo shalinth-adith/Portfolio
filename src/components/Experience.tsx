@@ -59,7 +59,11 @@ const workItems: Project[] = [
   },
 ];
 
-export default function Experience({ openBooking }: { openBooking: () => void }) {
+export default function Experience({
+  openBooking,
+}: {
+  openBooking: () => void;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(2);
 
@@ -69,14 +73,29 @@ export default function Experience({ openBooking }: { openBooking: () => void })
 
       gsap.fromTo(
         ".exp-header-el",
-        { y: 36, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "power3.out", scrollTrigger: st }
+        { y: 44, opacity: 0, filter: "blur(10px)" },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: st,
+        },
       );
 
       gsap.fromTo(
         ".exp-row",
         { x: -36, opacity: 0 },
-        { x: 0, opacity: 1, stagger: 0.08, duration: 0.75, ease: "power3.out", scrollTrigger: { ...st, start: "top 68%" } }
+        {
+          x: 0,
+          opacity: 1,
+          stagger: 0.08,
+          duration: 0.75,
+          ease: "power3.out",
+          scrollTrigger: { ...st, start: "top 68%" },
+        },
       );
 
       // Row hover effects
@@ -84,15 +103,17 @@ export default function Experience({ openBooking }: { openBooking: () => void })
         const company = row.querySelector<HTMLElement>(".exp-company");
         row.addEventListener("mouseenter", () => {
           gsap.to(row, { paddingLeft: 12, duration: 0.3, ease: "power2.out" });
-          if (company) gsap.to(company, { letterSpacing: "0.01em", duration: 0.3 });
+          if (company)
+            gsap.to(company, { letterSpacing: "0.01em", duration: 0.3 });
         });
         row.addEventListener("mouseleave", () => {
           gsap.to(row, { paddingLeft: 0, duration: 0.3 });
-          if (company) gsap.to(company, { letterSpacing: "-0.02em", duration: 0.3 });
+          if (company)
+            gsap.to(company, { letterSpacing: "-0.02em", duration: 0.3 });
         });
       });
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   const toggle = (i: number) => {
@@ -111,7 +132,16 @@ export default function Experience({ openBooking }: { openBooking: () => void })
       style={{ padding: "100px 48px 100px 104px", background: "var(--bg)" }}
     >
       {/* Header */}
-      <div className="exp-header-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start", marginBottom: 60 }}>
+      <div
+        className="exp-header-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 48,
+          alignItems: "start",
+          marginBottom: 60,
+        }}
+      >
         <div>
           <div className="exp-header-el section-label" style={{ opacity: 0 }}>
             <span className="dot" />
@@ -128,21 +158,44 @@ export default function Experience({ openBooking }: { openBooking: () => void })
               opacity: 0,
             }}
           >
-            Explore My iOS<br />Journey
+            Explore My iOS
+            <br />
+            <span className="serif-it" style={{ fontSize: "1.06em" }}>
+              Journey
+            </span>
           </h2>
         </div>
         <div className="exp-header-el" style={{ opacity: 0 }}>
-          <p style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.72, marginBottom: 18 }}>
-            Over the past 1+ years, I&apos;ve shipped apps across domains - from social tools to finance to open-source libraries.
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--ink2)",
+              lineHeight: 1.72,
+              marginBottom: 18,
+            }}
+          >
+            Over the past 1+ years, I&apos;ve shipped apps across domains - from
+            social tools to finance to open-source libraries.
           </p>
           <button
             className="link-arrow"
-            style={{ color: "var(--ink)", background: "none", border: "none", cursor: "none" }}
+            style={{
+              color: "var(--ink)",
+              background: "none",
+              border: "none",
+              cursor: "none",
+            }}
             onClick={openBooking}
           >
             Book A Call
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M2 10L10 2M10 2H4M10 2V8"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>
@@ -150,7 +203,16 @@ export default function Experience({ openBooking }: { openBooking: () => void })
 
       {/* Projects */}
       <div style={{ marginBottom: 48 }}>
-        <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", color: "var(--ink3)", textTransform: "uppercase", marginBottom: 12 }}>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: "0.1em",
+            color: "var(--ink3)",
+            textTransform: "uppercase",
+            marginBottom: 12,
+          }}
+        >
           Projects
         </div>
         <div style={{ borderTop: "1px solid var(--line)" }}>
@@ -170,28 +232,90 @@ export default function Experience({ openBooking }: { openBooking: () => void })
                 }
               }}
             >
-              <div className="exp-row-grid" style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", alignItems: "center", gap: 24 }}>
+              <div
+                className="exp-row-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "2fr 2fr 1fr",
+                  alignItems: "center",
+                  gap: 24,
+                }}
+              >
                 <div>
                   <div
                     className="exp-company"
-                    style={{ fontSize: 18, fontWeight: 400, color: "var(--ink)", letterSpacing: "-0.02em", transition: "letter-spacing 0.3s", display: "flex", alignItems: "center", gap: 8 }}
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 400,
+                      color: "var(--ink)",
+                      letterSpacing: "-0.02em",
+                      transition: "letter-spacing 0.3s",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                    }}
                   >
+                    <span className="exp-index">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     {proj.company}
                     {proj.link && (
-                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.4, flexShrink: 0 }}>
-                        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        style={{ opacity: 0.4, flexShrink: 0 }}
+                      >
+                        <path
+                          d="M2 10L10 2M10 2H4M10 2V8"
+                          stroke="var(--ink)"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     )}
                   </div>
-                  <div style={{ fontSize: 13, color: "var(--ink3)", marginTop: 3, display: "flex", alignItems: "center", gap: 8 }}>
-                    <span>•</span>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink3)",
+                      marginTop: 3,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <span style={{ color: "var(--accent)" }}>•</span>
                     {proj.period}
                   </div>
                 </div>
-                <div style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.5 }}>{proj.role}</div>
-                <div className="exp-tags" style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+                <div
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink2)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {proj.role}
+                </div>
+                <div
+                  className="exp-tags"
+                  style={{
+                    display: "flex",
+                    gap: 8,
+                    justifyContent: "flex-end",
+                    flexWrap: "wrap",
+                  }}
+                >
                   {proj.tags.map((tag: string) => (
-                    <span key={tag} className={proj.dark ? "badge badge-dark" : "badge"}>{tag}</span>
+                    <span
+                      key={tag}
+                      className={proj.dark ? "badge badge-dark" : "badge"}
+                    >
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -202,7 +326,16 @@ export default function Experience({ openBooking }: { openBooking: () => void })
 
       {/* Work */}
       <div>
-        <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", color: "var(--ink3)", textTransform: "uppercase", marginBottom: 12 }}>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: "0.1em",
+            color: "var(--ink3)",
+            textTransform: "uppercase",
+            marginBottom: 12,
+          }}
+        >
           Work
         </div>
         <div style={{ borderTop: "1px solid var(--line)" }}>
@@ -212,23 +345,64 @@ export default function Experience({ openBooking }: { openBooking: () => void })
               className="exp-row"
               style={{ opacity: 0, paddingLeft: 0 }}
             >
-              <div className="exp-row-grid" style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", alignItems: "center", gap: 24 }}>
+              <div
+                className="exp-row-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "2fr 2fr 1fr",
+                  alignItems: "center",
+                  gap: 24,
+                }}
+              >
                 <div>
                   <div
                     className="exp-company"
-                    style={{ fontSize: 18, fontWeight: 400, color: "var(--ink)", letterSpacing: "-0.02em", transition: "letter-spacing 0.3s" }}
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 400,
+                      color: "var(--ink)",
+                      letterSpacing: "-0.02em",
+                      transition: "letter-spacing 0.3s",
+                    }}
                   >
                     {proj.company}
                   </div>
-                  <div style={{ fontSize: 13, color: "var(--ink3)", marginTop: 3, display: "flex", alignItems: "center", gap: 8 }}>
-                    <span>•</span>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink3)",
+                      marginTop: 3,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <span style={{ color: "var(--accent)" }}>•</span>
                     {proj.period}
                   </div>
                 </div>
-                <div style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.5 }}>{proj.role}</div>
-                <div className="exp-tags" style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+                <div
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink2)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {proj.role}
+                </div>
+                <div
+                  className="exp-tags"
+                  style={{
+                    display: "flex",
+                    gap: 8,
+                    justifyContent: "flex-end",
+                    flexWrap: "wrap",
+                  }}
+                >
                   {proj.tags.map((tag: string) => (
-                    <span key={tag} className="badge">{tag}</span>
+                    <span key={tag} className="badge">
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>

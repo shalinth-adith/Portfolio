@@ -60,7 +60,7 @@ class TextScramble {
           char = this.chars[Math.floor(Math.random() * this.chars.length)];
           this.queue[i].char = char;
         }
-        output += `<span style="color:var(--ink3)">${char}</span>`;
+        output += `<span style="color:var(--accent)">${char}</span>`;
       } else {
         if (from === "\n") output += "<br/>";
         else output += from;

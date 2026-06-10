@@ -48,8 +48,16 @@ export default function Blog() {
 
       gsap.fromTo(
         ".blog-header-el",
-        { y: 32, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "power3.out", scrollTrigger: st }
+        { y: 40, opacity: 0, filter: "blur(10px)" },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: st,
+        },
       );
 
       gsap.fromTo(
@@ -63,7 +71,7 @@ export default function Blog() {
           duration: 0.9,
           ease: "power3.out",
           scrollTrigger: { ...st, start: "top 68%" },
-        }
+        },
       );
 
       // Tilt on hover
@@ -94,7 +102,7 @@ export default function Blog() {
         });
       });
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
@@ -102,7 +110,11 @@ export default function Blog() {
       ref={sectionRef}
       id="blog"
       className="blog-section"
-      style={{ padding: "100px 48px", background: "var(--bg2)", textAlign: "center" }}
+      style={{
+        padding: "100px 48px",
+        background: "var(--bg2)",
+        textAlign: "center",
+      }}
     >
       {/* Label */}
       <div
@@ -124,7 +136,10 @@ export default function Blog() {
           opacity: 0,
         }}
       >
-        iOS Insights &amp; Dev Notes
+        iOS Insights &amp;{" "}
+        <span className="serif-it" style={{ fontSize: "1.06em" }}>
+          Dev Notes
+        </span>
       </h2>
 
       {/* Cards */}
@@ -146,22 +161,56 @@ export default function Blog() {
                 viewBox="0 0 400 200"
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid slice"
-                style={{ width: "100%", height: "100%", transition: "transform 0.6s cubic-bezier(0.23,1,0.32,1)", display: "block" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  transition: "transform 0.6s cubic-bezier(0.23,1,0.32,1)",
+                  display: "block",
+                }}
               >
                 <rect width="400" height="200" fill={post.bgColor} />
-                <ellipse cx="200" cy="185" rx="100" ry="55" fill={post.bgColor} opacity="0.55" />
-                <ellipse cx="200" cy="85" rx="50" ry="50" fill={post.accentColor} opacity="0.22" />
-                <ellipse cx="200" cy="82" rx="28" ry="28" fill={post.accentColor} opacity="0.88" />
+                <ellipse
+                  cx="200"
+                  cy="185"
+                  rx="100"
+                  ry="55"
+                  fill={post.bgColor}
+                  opacity="0.55"
+                />
+                <ellipse
+                  cx="200"
+                  cy="85"
+                  rx="50"
+                  ry="50"
+                  fill={post.accentColor}
+                  opacity="0.22"
+                />
+                <ellipse
+                  cx="200"
+                  cy="82"
+                  rx="28"
+                  ry="28"
+                  fill={post.accentColor}
+                  opacity="0.88"
+                />
               </svg>
             </div>
             <div style={{ padding: "18px 20px 22px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  marginBottom: 10,
+                }}
+              >
                 <span
                   style={{
                     fontSize: 11,
                     fontWeight: 500,
-                    background: "var(--black)",
-                    color: "white",
+                    background: "var(--accent-soft)",
+                    color: "var(--accent)",
+                    border: "1px solid rgba(240, 81, 56, 0.25)",
                     padding: "4px 10px",
                     borderRadius: 999,
                     letterSpacing: "0.06em",
@@ -169,9 +218,18 @@ export default function Blog() {
                 >
                   {post.tag}
                 </span>
-                <span style={{ fontSize: 13, color: "var(--ink3)" }}>{post.readTime}</span>
+                <span style={{ fontSize: 13, color: "var(--ink3)" }}>
+                  {post.readTime}
+                </span>
               </div>
-              <h3 style={{ fontSize: 15, fontWeight: 400, lineHeight: 1.5, color: "var(--ink)" }}>
+              <h3
+                style={{
+                  fontSize: 15,
+                  fontWeight: 400,
+                  lineHeight: 1.5,
+                  color: "var(--ink)",
+                }}
+              >
                 {post.title}
               </h3>
             </div>

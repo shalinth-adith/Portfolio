@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-const DARK_DOT   = "#1a1a1a";
+const DARK_DOT   = "#F05138";
 const DARK_RING  = "rgba(26,26,26,0.5)";
-const LIGHT_DOT  = "#ffffff";
+const LIGHT_DOT  = "#FF6B4E";
 const LIGHT_RING = "rgba(255,255,255,0.7)";
 
 function getBgUnderCursor(x: number, y: number): string | null {

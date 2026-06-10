@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const skills = [
   "SwiftUI",
@@ -35,19 +36,50 @@ export default function Marquee() {
       const container = containerRef.current;
       if (!container) return;
 
-      const pause = () => gsap.to(tween, { timeScale: 0, duration: 0.6, ease: "power2.out" });
-      const resume = () => gsap.to(tween, { timeScale: 1, duration: 0.6, ease: "power2.in" });
+      let hovered = false;
+
+      const pause = () => {
+        hovered = true;
+        gsap.to(tween, { timeScale: 0, duration: 0.6, ease: "power2.out" });
+      };
+      const resume = () => {
+        hovered = false;
+        gsap.to(tween, { timeScale: 1, duration: 0.6, ease: "power2.in" });
+      };
 
       container.addEventListener("mouseenter", pause);
       container.addEventListener("mouseleave", resume);
+
+      // Scroll velocity makes the strip race — fast flicks feel alive
+      ScrollTrigger.create({
+        onUpdate: (self) => {
+          if (hovered) return;
+          const boost = gsap.utils.clamp(
+            1,
+            6,
+            1 + Math.abs(self.getVelocity()) / 350,
+          );
+          tween.timeScale(boost);
+          gsap.to(tween, {
+            timeScale: 1,
+            duration: 1.4,
+            ease: "power2.out",
+            overwrite: true,
+          });
+        },
+      });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const items = [...skills, ...skills];
 
   return (
-    <div ref={containerRef} className="marquee-strip" style={{ background: "var(--bg)" }}>
+    <div
+      ref={containerRef}
+      className="marquee-strip"
+      style={{ background: "var(--bg)" }}
+    >
       <div
         ref={trackRef}
         style={{ display: "flex", width: "max-content", gap: 0 }}
@@ -63,27 +95,40 @@ export default function Marquee() {
               whiteSpace: "nowrap",
             }}
           >
-            <span
-              style={{
-                fontSize: 13,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "var(--ink3)",
-              }}
-            >
-              {skill}
-            </span>
+            {i % 2 === 1 ? (
+              <span
+                className="serif-it"
+                style={{
+                  fontSize: 16,
+                  letterSpacing: "0.01em",
+                  color: "var(--ink2)",
+                }}
+              >
+                {skill}
+              </span>
+            ) : (
+              <span
+                style={{
+                  fontSize: 13,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--ink3)",
+                }}
+              >
+                {skill}
+              </span>
+            )}
             <span
               style={{
                 display: "inline-block",
-                width: 4,
-                height: 4,
-                borderRadius: "50%",
-                background: "var(--ink)",
-                marginLeft: 8,
-                opacity: 0.4,
+                marginLeft: 12,
+                fontSize: 9,
+                color: "var(--accent)",
+                lineHeight: 1,
               }}
-            />
+            >
+              ✦
+            </span>
           </div>
         ))}
       </div>

@@ -9,7 +9,16 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const stack = ["Swift", "SwiftUI", "Xcode", "Firebase", "CoreData", "Figma", "AVFoundation", "CloudKit"];
+const stack = [
+  "Swift",
+  "SwiftUI",
+  "Xcode",
+  "Firebase",
+  "CoreData",
+  "Figma",
+  "AVFoundation",
+  "CloudKit",
+];
 
 const bullets = [
   "With 1+ years of Swift experience, I build intuitive, user-focused iOS apps that solve real problems and deliver seamless digital experiences.",
@@ -24,18 +33,32 @@ export default function About() {
     () => {
       const st = { trigger: sectionRef.current, start: "top 72%" };
 
-      // Section label + title
+      // Section label + title — rise out of a blur
       gsap.fromTo(
         ".about-label, .about-title",
-        { y: 32, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "power3.out", scrollTrigger: st }
+        { y: 40, opacity: 0, filter: "blur(10px)" },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: st,
+        },
       );
 
       // Left text column
       gsap.fromTo(
         ".about-left",
         { x: -32, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.9, ease: "power3.out", scrollTrigger: { ...st, start: "top 75%" } }
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: { ...st, start: "top 75%" },
+        },
       );
 
       // Stack pills pop in with bounce
@@ -49,14 +72,21 @@ export default function About() {
           duration: 0.5,
           ease: "back.out(1.7)",
           scrollTrigger: { ...st, start: "top 68%" },
-        }
+        },
       );
 
       // Middle stat card scale up
       gsap.fromTo(
         ".stat-card-wrap",
         { scale: 0.94, opacity: 0, y: 24 },
-        { scale: 1, opacity: 1, y: 0, duration: 0.9, ease: "power3.out", scrollTrigger: st }
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: st,
+        },
       );
 
       // Counter animation
@@ -71,29 +101,25 @@ export default function About() {
             duration: 1.6,
             ease: "power2.out",
             onUpdate: () => {
-              if (counterRef.current) counterRef.current.textContent = `${Math.round(obj.val)}`;
+              if (counterRef.current)
+                counterRef.current.textContent = `${Math.round(obj.val)}`;
             },
           });
         },
       });
 
-      // Mini photo clip reveal
-      gsap.fromTo(
-        ".photo-mini-wrap",
-        { clipPath: "inset(100% 0 0 0)" },
-        {
-          clipPath: "inset(0% 0 0 0)",
-          duration: 1.1,
-          ease: "power4.inOut",
-          scrollTrigger: { ...st, start: "top 60%" },
-        }
-      );
-
       // Right bullets stagger
       gsap.fromTo(
         ".bullet-row",
         { x: 32, opacity: 0 },
-        { x: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: "power3.out", scrollTrigger: { ...st, start: "top 68%" } }
+        {
+          x: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { ...st, start: "top 68%" },
+        },
       );
 
       // Gallery clip reveals
@@ -106,8 +132,27 @@ export default function About() {
           duration: 1.1,
           ease: "power4.inOut",
           scrollTrigger: { trigger: ".gallery-strip", start: "top 80%" },
-        }
+        },
       );
+
+      // Gallery image parallax — images drift inside their frames while scrolling
+      gsap.utils.toArray<HTMLElement>(".gal-item img").forEach((img) => {
+        gsap.fromTo(
+          img,
+          { yPercent: -7, scale: 1.16 },
+          {
+            yPercent: 7,
+            scale: 1.16,
+            ease: "none",
+            scrollTrigger: {
+              trigger: img.closest(".gal-item") as Element,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          },
+        );
+      });
 
       // Gallery tilt on hover
       document.querySelectorAll<HTMLElement>(".gal-item").forEach((item) => {
@@ -123,11 +168,16 @@ export default function About() {
           });
         });
         item.addEventListener("mouseleave", () => {
-          gsap.to(item, { rotateY: 0, scale: 1, duration: 0.5, ease: "power3.out" });
+          gsap.to(item, {
+            rotateY: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: "power3.out",
+          });
         });
       });
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
@@ -154,24 +204,51 @@ export default function About() {
           opacity: 0,
         }}
       >
-        iOS Developer &amp;<br />SwiftUI Craftsman
+        iOS Developer &amp;
+        <br />
+        SwiftUI{" "}
+        <span className="serif-it" style={{ fontSize: "1.06em" }}>
+          Craftsman
+        </span>
       </h2>
 
       {/* 3-col grid */}
-      <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 32, alignItems: "start" }}>
-
+      <div
+        className="about-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 32,
+          alignItems: "start",
+        }}
+      >
         {/* Left — Text + Stack */}
         <div className="about-left" style={{ opacity: 0 }}>
           <p style={{ fontSize: 14.5, color: "var(--ink2)", lineHeight: 1.72 }}>
-            I specialise in turning ideas into apps that live in your pocket. My approach blends clean SwiftUI architecture with obsessive attention to animation and feel.
+            I specialise in turning ideas into apps that live in your pocket. My
+            approach blends clean SwiftUI architecture with obsessive attention
+            to animation and feel.
           </p>
           <br />
           <p style={{ fontSize: 14.5, color: "var(--ink2)", lineHeight: 1.72 }}>
-            I&apos;m a fresh iOS developer who believes great apps should feel like magic - not manuals. I build with SwiftUI and spend way too much time getting the animations just right.
+            I&apos;m a fresh iOS developer who believes great apps should feel
+            like magic - not manuals. I build with SwiftUI and spend way too
+            much time getting the animations just right.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 32 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 10,
+              marginTop: 32,
+            }}
+          >
             {stack.map((s) => (
-              <div key={s} className="stack-item stack-pill" style={{ opacity: 0 }}>
+              <div
+                key={s}
+                className="stack-item stack-pill"
+                style={{ opacity: 0 }}
+              >
                 <span className="stack-dot" />
                 {s}
               </div>
@@ -184,45 +261,133 @@ export default function About() {
           <div className="stat-card">
             <div
               style={{
-                width: 44, height: 44, background: "var(--white)", borderRadius: "50%",
-                display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18,
+                width: 44,
+                height: 44,
+                background: "var(--white)",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 18,
               }}
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="var(--ink)" strokeWidth="1.5" />
-                <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" stroke="var(--ink)" strokeWidth="1.5" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="var(--ink)"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"
+                  stroke="var(--ink)"
+                  strokeWidth="1.5"
+                />
               </svg>
             </div>
-            <div style={{ display: "flex", alignItems: "flex-end", lineHeight: 1 }}>
-              <span ref={counterRef} style={{ fontSize: 52, fontWeight: 200, letterSpacing: "-0.04em" }}>0</span>
-              <span style={{ fontSize: 52, fontWeight: 200, letterSpacing: "-0.04em" }}>+</span>
+            <div
+              style={{ display: "flex", alignItems: "flex-end", lineHeight: 1 }}
+            >
+              <span
+                ref={counterRef}
+                style={{
+                  fontSize: 52,
+                  fontWeight: 200,
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                0
+              </span>
+              <span
+                style={{
+                  fontSize: 52,
+                  fontWeight: 200,
+                  letterSpacing: "-0.04em",
+                  color: "var(--accent)",
+                }}
+              >
+                +
+              </span>
             </div>
-            <p style={{ fontSize: 13, color: "var(--ink2)", lineHeight: 1.55, marginTop: 10 }}>
+            <p
+              style={{
+                fontSize: 13,
+                color: "var(--ink2)",
+                lineHeight: 1.55,
+                marginTop: 10,
+              }}
+            >
               Apps shipped to the App Store, used by real people
             </p>
           </div>
-
         </div>
 
         {/* Right — Bullets */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 26, paddingTop: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 26,
+            paddingTop: 8,
+          }}
+        >
           {bullets.map((text, i) => (
-            <div key={i} className="bullet-row" style={{ display: "flex", gap: 14, alignItems: "flex-start", opacity: 0 }}>
+            <div
+              key={i}
+              className="bullet-row"
+              style={{
+                display: "flex",
+                gap: 14,
+                alignItems: "flex-start",
+                opacity: 0,
+              }}
+            >
               <div
                 style={{
-                  width: 30, height: 30, flexShrink: 0, borderRadius: "50%",
-                  background: "var(--black)", color: "white",
-                  display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2,
+                  width: 30,
+                  height: 30,
+                  flexShrink: 0,
+                  borderRadius: "50%",
+                  background: "var(--accent)",
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: 2,
                   transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)",
                 }}
-                onMouseEnter={(e) => gsap.to(e.currentTarget, { rotate: 90, scale: 1.15, duration: 0.4, ease: "back.out(1.7)" })}
-                onMouseLeave={(e) => gsap.to(e.currentTarget, { rotate: 0, scale: 1, duration: 0.4, ease: "power3.out" })}
+                onMouseEnter={(e) =>
+                  gsap.to(e.currentTarget, {
+                    rotate: 90,
+                    scale: 1.15,
+                    duration: 0.4,
+                    ease: "back.out(1.7)",
+                  })
+                }
+                onMouseLeave={(e) =>
+                  gsap.to(e.currentTarget, {
+                    rotate: 0,
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "power3.out",
+                  })
+                }
               >
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M6 1v10M1 6h10" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+                  <path
+                    d="M6 1v10M1 6h10"
+                    stroke="white"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
-              <p style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.65 }}>{text}</p>
+              <p
+                style={{ fontSize: 14, color: "var(--ink2)", lineHeight: 1.65 }}
+              >
+                {text}
+              </p>
             </div>
           ))}
         </div>
@@ -242,11 +407,38 @@ export default function About() {
         }}
       >
         {[
-          { src: `${base}/gallery-huddle.jpg`, alt: "Huddle", fit: "cover" as const, pos: "center center", bg: "#1a1008" },
-          { src: `${base}/gallery-expense.jpg`, alt: "Expense Tracker Pro", fit: "cover" as const, pos: "center center", bg: "#0b0d1a" },
-          { src: `${base}/gallery-routine.jpg`, alt: "The Routine", fit: "cover" as const, pos: "center center", bg: "#111" },
+          {
+            src: `${base}/gallery-huddle.jpg`,
+            alt: "Huddle",
+            fit: "cover" as const,
+            pos: "center center",
+            bg: "#1a1008",
+          },
+          {
+            src: `${base}/gallery-expense.jpg`,
+            alt: "Expense Tracker Pro",
+            fit: "cover" as const,
+            pos: "center center",
+            bg: "#0b0d1a",
+          },
+          {
+            src: `${base}/gallery-routine.jpg`,
+            alt: "The Routine",
+            fit: "cover" as const,
+            pos: "center center",
+            bg: "#111",
+          },
         ].map((item, i) => (
-          <div key={i} className="gal-item gal-clip" style={{ clipPath: "inset(0 100% 0 0)", position: "relative", overflow: "hidden", background: item.bg }}>
+          <div
+            key={i}
+            className="gal-item gal-clip"
+            style={{
+              clipPath: "inset(0 100% 0 0)",
+              position: "relative",
+              overflow: "hidden",
+              background: item.bg,
+            }}
+          >
             <img
               src={item.src}
               alt={item.alt}
@@ -256,14 +448,26 @@ export default function About() {
                 objectFit: item.fit,
                 objectPosition: item.pos,
                 display: "block",
-                transition: "transform 0.6s cubic-bezier(0.23,1,0.32,1)",
               }}
               loading="lazy"
             />
-            <div style={{ position: "absolute", inset: 0, background: "rgba(10,10,10,0.15)", pointerEvents: "none" }} />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "rgba(10,10,10,0.15)",
+                pointerEvents: "none",
+              }}
+            />
             <div className="gal-btn">
               <svg width="16" height="16" viewBox="0 0 12 12" fill="none">
-                <path d="M2 10L10 2M10 2H4M10 2V8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M2 10L10 2M10 2H4M10 2V8"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
           </div>

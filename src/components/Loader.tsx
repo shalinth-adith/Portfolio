@@ -82,6 +82,18 @@ export default function Loader() {
             {char === " " ? " " : char}
           </span>
         ))}
+        <span
+          className="ltr serif-it inline-block"
+          style={{
+            fontSize: "clamp(42px, 7vw, 100px)",
+            letterSpacing: "-0.04em",
+            color: "var(--accent)",
+            lineHeight: 1,
+            opacity: 0,
+          }}
+        >
+          .
+        </span>
       </div>
     </div>
   );
