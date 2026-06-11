@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scrollToEl } from "@/utils/scroll";
+import ParticleField from "./fx/ParticleField";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -165,6 +166,11 @@ export default function Hero() {
         background: "var(--bg)",
       }}
     >
+      {/* Futuristic ambient layer — aurora glow behind, constellation on top */}
+      <div className="hero-aurora hero-aurora-1" aria-hidden="true" />
+      <div className="hero-aurora hero-aurora-2" aria-hidden="true" />
+      <ParticleField style={{ zIndex: 2, opacity: 0.75 }} />
+
       {/* Left sidebar */}
       <div
         className="hero-sidebar"

@@ -258,7 +258,7 @@ export default function About() {
 
         {/* Middle — Stat card + mini photo */}
         <div className="stat-card-wrap" style={{ opacity: 0 }}>
-          <div className="stat-card">
+          <div className="stat-card holo-border">
             <div
               style={{
                 width: 44,

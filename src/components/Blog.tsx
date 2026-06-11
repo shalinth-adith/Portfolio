@@ -231,7 +231,7 @@ export default function Blog() {
         {slots.map((post, i) => (
           <a
             key={i}
-            className="blog-card"
+            className="blog-card holo-border"
             href={post?.url ?? "https://dev.to/t/swift"}
             target="_blank"
             rel="noopener noreferrer"

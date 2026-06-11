@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scrollToEl, scrollToTop } from "@/utils/scroll";
+import Starfield from "./fx/Starfield";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -78,6 +79,9 @@ export default function Footer() {
         overflow: "hidden",
       }}
     >
+      {/* Deep-space finale — twinkling stars + shooting streaks */}
+      <Starfield />
+
       {/* Subtle grid lines */}
       <div
         style={{ position: "absolute", inset: 0, pointerEvents: "none" }}

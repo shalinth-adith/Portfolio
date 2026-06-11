@@ -756,6 +756,136 @@ html.theme-switching *::after {
   display: inline-block;
 }
 
+/* ── FUTURISTIC FX ── */
+
+/* Aurora glow blobs drifting behind the hero */
+.hero-aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+  will-change: transform;
+}
+
+[data-theme="dark"] .hero-aurora {
+  opacity: 0.6;
+}
+
+.hero-aurora-1 {
+  width: 540px;
+  height: 540px;
+  left: -140px;
+  top: 6%;
+  background: radial-gradient(circle at 35% 35%, rgba(240, 81, 56, 0.34), transparent 65%);
+  animation: auroraDrift1 16s ease-in-out infinite alternate;
+}
+
+.hero-aurora-2 {
+  width: 460px;
+  height: 460px;
+  left: 28%;
+  bottom: -12%;
+  background: radial-gradient(circle at 60% 40%, rgba(98, 140, 255, 0.26), transparent 65%);
+  animation: auroraDrift2 21s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift1 {
+  to { transform: translate(90px, 60px) scale(1.15); }
+}
+
+@keyframes auroraDrift2 {
+  to { transform: translate(-70px, -50px) scale(1.12); }
+}
+
+/* Holographic rotating border — revealed on hover */
+@property --holo-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.holo-border {
+  position: relative;
+}
+
+.holo-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 1.2px;
+  background: conic-gradient(
+    from var(--holo-angle),
+    transparent 0deg,
+    var(--accent) 40deg,
+    transparent 110deg,
+    transparent 180deg,
+    rgba(110, 160, 255, 0.9) 230deg,
+    transparent 300deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+  animation: holoSpin 3s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.holo-border:hover::after {
+  opacity: 1;
+}
+
+@keyframes holoSpin {
+  to { --holo-angle: 360deg; }
+}
+
+/* Holographic shimmer sweep on the footer email */
+.footer-email:hover {
+  background: linear-gradient(
+    100deg,
+    var(--accent),
+    #ffd9c2 30%,
+    #9db8ff 55%,
+    var(--accent) 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holoSweep 2.4s linear infinite;
+}
+
+@keyframes holoSweep {
+  to { background-position: 200% 0; }
+}
+
+/* Neon glow on the scroll progress bar */
+.scroll-progress {
+  box-shadow: 0 0 10px rgba(240, 81, 56, 0.55), 0 0 24px rgba(240, 81, 56, 0.3);
+}
+
+/* Glowing satellites on the CTA orbit rings */
+.cta-orb::after {
+  box-shadow: 0 0 12px rgba(240, 81, 56, 0.8), 0 0 28px rgba(240, 81, 56, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora,
+  .holo-border::after,
+  .footer-email:hover,
+  .cta-orb,
+  .cta-orb-2,
+  .pulse,
+  .scroll-arrow {
+    animation: none !important;
+  }
+}
+
 /* ── TOUCH / MOBILE ── */
 @media (pointer: coarse) {
   body { cursor: auto; }

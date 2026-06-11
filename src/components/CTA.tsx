@@ -4,13 +4,20 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import WarpGrid from "./fx/WarpGrid";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 class TextScramble {
   private el: HTMLElement;
   private chars: string;
-  private queue: Array<{ from: string; to: string; start: number; end: number; char?: string }>;
+  private queue: Array<{
+    from: string;
+    to: string;
+    start: number;
+    end: number;
+    char?: string;
+  }>;
   private frame: number;
   private frameReq: number;
   private resolve!: () => void;
@@ -26,7 +33,10 @@ class TextScramble {
 
   setText(newText: string): Promise<void> {
     const lines = newText.split("\n");
-    const oldLines = this.el.innerHTML.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "").split("\n");
+    const oldLines = this.el.innerHTML
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<[^>]+>/g, "")
+      .split("\n");
     const oldText = oldLines.join("\n").split("");
     const newFlat = lines.join("\n").split("");
     const len = Math.max(oldText.length, newFlat.length);
@@ -107,11 +117,12 @@ export default function CTA({ openBooking }: { openBooking: () => void }) {
           duration: 0.85,
           ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 60%" },
-        }
+        },
       );
 
       // Magnetic CTA link
-      const ctaLink = sectionRef.current?.querySelector<HTMLElement>(".cta-link");
+      const ctaLink =
+        sectionRef.current?.querySelector<HTMLElement>(".cta-link");
       if (ctaLink) {
         ctaLink.addEventListener("mousemove", (e: MouseEvent) => {
           const r = ctaLink.getBoundingClientRect();
@@ -125,11 +136,16 @@ export default function CTA({ openBooking }: { openBooking: () => void }) {
           });
         });
         ctaLink.addEventListener("mouseleave", () => {
-          gsap.to(ctaLink, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1,0.5)" });
+          gsap.to(ctaLink, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "elastic.out(1,0.5)",
+          });
         });
       }
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
@@ -144,6 +160,9 @@ export default function CTA({ openBooking }: { openBooking: () => void }) {
         overflow: "hidden",
       }}
     >
+      {/* Perspective grid racing toward the horizon */}
+      <WarpGrid />
+
       {/* Orbiting rings */}
       <div className="cta-orb" />
       <div className="cta-orb-2" />
@@ -162,24 +181,49 @@ export default function CTA({ openBooking }: { openBooking: () => void }) {
             lineHeight: 1.2,
           }}
         >
-          Got an App Idea?<br />Let&apos;s Build It!
+          Got an App Idea?
+          <br />
+          Let&apos;s Build It!
         </h2>
 
         <p
           className="cta-fade"
-          style={{ fontSize: 14.5, color: "var(--ink2)", maxWidth: 460, margin: "0 auto 28px", lineHeight: 1.7, opacity: 0 }}
+          style={{
+            fontSize: 14.5,
+            color: "var(--ink2)",
+            maxWidth: 460,
+            margin: "0 auto 28px",
+            lineHeight: 1.7,
+            opacity: 0,
+          }}
         >
-          I&apos;m always excited to collaborate on new iOS projects. Whether you&apos;re starting from scratch or need a SwiftUI specialist to level up an existing app.
+          I&apos;m always excited to collaborate on new iOS projects. Whether
+          you&apos;re starting from scratch or need a SwiftUI specialist to
+          level up an existing app.
         </p>
 
         <button
           className="cta-fade cta-link link-arrow"
           onClick={openBooking}
-          style={{ fontSize: 15, color: "var(--ink)", opacity: 0, display: "inline-flex", background: "none", border: "none", cursor: "none" }}
+          style={{
+            fontSize: 15,
+            color: "var(--ink)",
+            opacity: 0,
+            display: "inline-flex",
+            background: "none",
+            border: "none",
+            cursor: "none",
+          }}
         >
           Book A Call
           <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M2 10L10 2M10 2H4M10 2V8"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       </div>
